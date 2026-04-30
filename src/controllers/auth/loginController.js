@@ -35,16 +35,24 @@ const loginController = async (req, res) => {
       })
     }
 
-    const accessToken  = generateAccessToken(findUser);
-    const refreshToken = generateRefreshToken(findUser);
+    if (!findUser.isEmailVerified) {
+      {
+        return res.status(403).json({
+          success: false,
+          message: 'Please verify your email before logging in'
+        })
+      }
+      const accessToken = generateAccessToken(findUser);
+      const refreshToken = generateRefreshToken(findUser);
 
-    return res.status(200).json({
-      success : true ,
-      message : 'User logged in successfully',
-      data : findUser,
-      accessToken,
-      refreshToken  
-    })
+      return res.status(200).json({
+        success: true,
+        message: 'User logged in successfully',
+        data: findUser,
+        accessToken,
+        refreshToken
+      })
+    }
   }
   catch (error) {
     console.error("Error occurred while logging in:", error);
