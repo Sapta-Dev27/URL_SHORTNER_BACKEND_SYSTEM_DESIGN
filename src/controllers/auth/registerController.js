@@ -54,6 +54,7 @@ const registerController = async (req, res) => {
        <a href="${verificationLink}">${verificationLink}</a>`
     )
     
+
     
 
     return res.status(201).json({

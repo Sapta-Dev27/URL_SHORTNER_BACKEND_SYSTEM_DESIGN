@@ -8,12 +8,15 @@ import userRoutes from './routes/auth/userRoutes.js'
 import authUpdateRoutes from './routes/auth/update.js'
 import urlRoutes from './routes/url_shortner/urlRoutes.js';
 
+import cookieParser from 'cookie-parser';
+
 const PORT = process.env.PORT || 8002
-  
+
 const app = express();
 app.use(infoMiddleware);
 connectToDb();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/v1/health', (req, res) => {
     return res.status(304).json({
