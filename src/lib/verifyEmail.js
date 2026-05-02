@@ -25,7 +25,7 @@ const sendVerificationEmail = async (emailTo, subject, content) => {
       },
       secure: false
     })
-
+    
     await transporter.sendMail({
       from: smtpFrom,
       to: emailTo,

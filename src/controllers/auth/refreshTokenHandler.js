@@ -43,6 +43,7 @@ const tokenHandler = async (req, res) => {
     const newRefreshToken = generateRefreshToken(user);
 
     user.refreshToken = newRefreshToken;
+    await user.save();
 
     res.cookie('refreshToken', newRefreshToken, {
       httpOnly: true,
